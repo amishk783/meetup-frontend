@@ -23,7 +23,7 @@ const Header = () => {
     <header className=" py-3 bg-[#f5deb3] lg:hover:bg-transparent absolute z-10 w-full text-white shadow-md">
       <nav className="flex justify-between items-center xl:max-container">
         <div className="mx-8 flex justify-start">
-          <Link to="/home">
+          <Link to="/Home">
             <h1 className=" text-slate-950 text-3xl font-semibold">Meetup</h1>
           </Link>
         </div>

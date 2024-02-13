@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Snackbar, SnackbarContent, IconButton } from "@material-ui/core";
-import Slide from "@material-ui/core/Slide";
+import Button from "@mui/material/Button";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import SnackbarContent from "@mui/material/SnackbarContent";
+import Slide from "@mui/material/Slide";
 import { Close } from "@mui/icons-material";
 const FeedBackToast = ({ message, isOpen, code }) => {
   const [open, setOpen] = useState(true);
   const [transition, setTransition] = useState(undefined);
-
 
   useEffect(() => {
     setTransition(() => Transition);
@@ -33,7 +35,7 @@ const FeedBackToast = ({ message, isOpen, code }) => {
         <SnackbarContent
           style={{
             // Add your custom styles here
-            backgroundColor: code==="failure"?"red":"green", // Example background color
+            backgroundColor: code === "failure" ? "red" : "green", // Example background color
             color: "#ffffff", // Example text color
             borderRadius: "8px", // Example border radius
           }}
