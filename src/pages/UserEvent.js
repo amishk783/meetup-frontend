@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/common/Header/Header";
 import Footer from "../components/common/Footer/Footer";
 import UserMeetupCard from "../components/UserMeetup/UserMeetupCard";
-import MeetupDetails from "./Meetup/MeetupDetails";
+import { host } from "../constant/constant";
+
 const UserEvent = () => {
   const [meetups, setMeetup] = useState([]);
   const token = localStorage.getItem("token");
@@ -11,8 +12,7 @@ const UserEvent = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url =
-        "https://meetup-backend-d94fd9d78c46.herokuapp.com/meetup/get-meetups";
+      const url = `${host}/meetup/get-meetups`;
       try {
         const response = await fetch(url, {
           method: "GET",

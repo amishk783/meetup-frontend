@@ -11,8 +11,6 @@ const UserMeetupCard = ({
   onRemove,
   onEdit,
 }) => {
-  const token = localStorage.getItem("token");
-
   return (
     <div className="flex flex-col xl:flex-row xl:w-2/3 max-sm:w-full xl:m-8 transition duration-300 ease-in-out transform hover:scale-105">
       <img

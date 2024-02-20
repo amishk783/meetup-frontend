@@ -1,13 +1,14 @@
 import { Fragment, useState } from "react";
 import { Loader } from "lucide-react";
-
+import { host } from "../../constant/constant";
 import groupImage from "../../assests/images/group-img.jpg";
 import MeetUpForm from "../../components/Meetup/MeetupForm";
 import Header from "../../components/common/Header/Header";
 import Footer from "../../components/common/Footer/Footer";
 
 const Meetup = () => {
-  const url = "http://localhost:3003/meetup/add-meetup";
+  const url =
+    `${host}/meetup/add-meetup`;
   const initialMeetup = { name: "", address: "", description: "" };
   const [isLoading, setIsLoading] = useState(false);
   const handleLoadingChange = (newLoading) => {

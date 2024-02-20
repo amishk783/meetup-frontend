@@ -5,6 +5,7 @@ import useInput from "../../../Hooks/useInput";
 import { loginActions } from "../../../Store/loginSlice";
 import { useState } from "react";
 import { userActions } from "../../../Store/userSlice";
+import { host } from "../../../constant/constant";
 
 const SignUpForm = (props) => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const SignUpForm = (props) => {
   const formSubmitHandler = async (event) => {
     event.preventDefault();
 
-    const url = `https://meetup-backend-d94fd9d78c46.herokuapp.com/users/add-user`;
+    const url = `${host}/users/add-user`;
 
     const response = await fetch(url, {
       method: "POST",
@@ -50,10 +51,11 @@ const SignUpForm = (props) => {
     console.log(data);
     const user = data.user;
     console.log(user);
+
     if (response.ok) {
-      localStorage.setItem("token", data.token);
-      dispatch(loginActions.login());
-      dispatch(userActions.setUser(user));
+  
+      dispatch(loginActions.login(data.token));   //settoken
+      dispatch(userActions.setUser(user));        //setuser
       navigate("/home");
     }
     if (response.status === 409) {

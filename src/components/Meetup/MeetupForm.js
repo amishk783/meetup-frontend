@@ -74,7 +74,9 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     }
   };
 
-  const formattedDate = moment(date).format("YYYY-MM-DD");
+  const formattedDate = moment(date).format("DD-MM-YYYY");
+
+  console.log(formattedDate)
   const formData = useMemo(() => {
     const data = new FormData();
     data.append("enteredAddress", enteredAddress);

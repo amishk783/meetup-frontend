@@ -1,15 +1,25 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-
+import { useState } from "react";
 import Header from "../components/common/Header/Header";
 import Footer from "../components/common/Footer/Footer";
 import HomeMeetupList from "../components/Meetup/AllMeetup/HomeMeetupList";
 import DatePicker from "../components/common/DatePicker";
-import Map from "../components/common/Functionality/Map";
+import Filter from "../components/common/Functionality/Filter";
 
 const HomeLogin = () => {
-  const user = useSelector((state) => state.user.isUser);
+  const user = useSelector((state) => state.user.user);
+
+  const [filter, setFilter] = useState("Today");
+
+
+  const handleFilter = (e) => {
+    setFilter(e.target.value);
+  }
+  console.log(filter);
+  
   const username = user.name;
+
   return (
     <Fragment>
       <Header />
@@ -19,7 +29,7 @@ const HomeLogin = () => {
             <div className="mb-5 mt-8 flex flex-col justify-between sm:mt-4 gl:flex-row">
               <div className="w-full">
                 <h1 className="text-3xl font-bold leading-10 gl:text-heading">
-                  Welcome,{username}
+                  Welcome, {username}
                 </h1>
                 <h2 className="mt-10 hidden text-2xl font-semibold leading-9 gl:block">
                   Upcoming Events
@@ -38,18 +48,16 @@ const HomeLogin = () => {
                   <h3 className="border-b-2 border-gray5 pb-3 text-xl font-medium capitalize md:text-xl">
                     Today
                   </h3>
+                  <Filter handleFilter={handleFilter}/>
                   <HomeMeetupList />
-                  
                 </div>
               </div>
-              <div className="sticky top-24 hidden h-[652px] w-[160px] pt-4 xl:block">
-                
-              </div>
+              <div className="sticky top-24 hidden h-[652px] w-[160px] pt-4 xl:block"></div>
             </div>
           </div>
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </Fragment>
   );
 };

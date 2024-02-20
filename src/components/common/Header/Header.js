@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import loginActions from "../../../Store/loginSlice";
+import {loginActions} from "../../../Store/loginSlice";
 import NavBar from "./NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -15,7 +15,6 @@ const Header = () => {
 
   console.log(isLogin);
   const handleLogout = () => {
-    localStorage.removeItem("token");
     dispatch(loginActions.logout());
     navigate("/home");
   };
@@ -32,15 +31,25 @@ const Header = () => {
         </div>
 
         <div className="flex max-sm:px-5 max-lg:hidden">
-          {
-            <Link
-              to={`/${!isLogin ? "login" : "#"}`}
+          {isLogin && (
+            <button
               onClick={handleLogout}
               className="mr-4 text-blue-600 bg-white px-4 py-2 rounded-full max-sm:py-2"
             >
-              {`${!isLogin ? "Log In" : "Log Out"}`}
-            </Link>
-          }
+              Logout
+            </button>
+          )}
+          {!isLogin && (
+            <button>
+              <Link
+                to={"/login"}
+                className="mr-4 text-blue-600 bg-white px-4 py-2 rounded-full max-sm:py-2"
+              >
+                Log In
+              </Link>
+            </button>
+          )}
+
           {
             <button className="mr-4 bg-red-500 hover:bg-red-600 text-white px-4 py-2  rounded-full max-sm:hidden">
               <Link to={`/${!isLogin ? "signup" : "book-ticket"}`}>

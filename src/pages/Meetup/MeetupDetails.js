@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/common/Header/Header";
 import Footer from "../../components/common/Footer/Footer";
 import SHOWMAP from "../../components/common/Functionality/Map";
-
+import { host } from "../../constant/constant";
 const MeetupDetails = () => {
   const [meetup, setMeetup] = useState(null);
   const token = localStorage.getItem("token");
@@ -13,7 +13,7 @@ const MeetupDetails = () => {
   console.log("hello");
   useEffect(() => {
     const fetchMeetup = async () => {
-      const url = "http://localhost:3003/meetup/get-meetup";
+      const url = `${host}/meetup/get-meetup`;
       try {
         const response = await fetch(url, {
           method: "POST",

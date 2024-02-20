@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "../../../Store/loginSlice";
 import useInput from "../../../Hooks/useInput";
 import { userActions } from "../../../Store/userSlice";
+import { host } from "../../../constant/constant";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const LoginForm = () => {
       return;
     }
     const upload = async () => {
-      const url = `https://meetup-backend-d94fd9d78c46.herokuapp.com/users/login`;
+      const url = `${host}/users/login`;
 
       const response = await fetch(url, {
         method: "POST",
@@ -53,13 +54,12 @@ const LoginForm = () => {
       });
 
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       const user = data.user;
       console.log(user);
       if (data.message === "successfull") {
-        localStorage.setItem("token", data.token);
         console.log(data.message);
-        dispatch(loginActions.login());
+        dispatch(loginActions.login(data.token));
         dispatch(userActions.setUser(user));
         navigate("/home");
         setafterPasswordError(true);
