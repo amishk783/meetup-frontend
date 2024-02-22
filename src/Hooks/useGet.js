@@ -1,11 +1,11 @@
-import {useState,useEffect} from "react";
-
+import { useState, useEffect } from "react";
+import { host } from "../constants/constant"
 const useGetFetch = (url, token, id) => {
   const [meetup, setMeetup] = useState([]);
   console.log(url);
   useEffect(() => {
     const prepopulateFetch = async () => {
-      const fetchUrl = `https://meetup-backend-d94fd9d78c46.herokuapp.com/${url}`;
+      const fetchUrl = `${host}/${url}`;
       try {
         const response = await fetch(fetchUrl, {
           method: "POST",

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MeetupCard from "./MeetupCard";
-import { host } from "../../constant/constant";
+import { host } from "../../constants/constant";
 const UpcomigMeetup = () => {
   const [meetupDetails, setmeetupList] = useState([]);
 

@@ -152,7 +152,6 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     setIsLoading,
     isLoading,
   ]);
- 
 
   const displayImage = eventImage ? eventImage.name : "Choose a file";
 
@@ -172,10 +171,18 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
           code={"success"}
         />
       )}
-      <div className=" border-b-[1px] border-zinc-400 pb-3 ">
-        <h1 className="text-3xl font-medium font-sans ">Create an Event</h1>
-        <p>Let's put your event infront of world!!</p>
-      </div>
+
+      {!isEdit ? (
+        <div className=" border-b-[1px] border-zinc-400 pb-3 ">
+          <h1 className="text-3xl font-medium font-sans ">Create an Event</h1>
+          <p>Let's put your event infront of world!!</p>
+        </div>
+      ) : (
+        <div className=" border-b-[1px] border-zinc-400 pb-3 ">
+          <h1 className="text-3xl font-medium font-sans ">Edit an Event</h1>
+          <p>Let's put your event infront of world!!</p>
+        </div>
+      )}
 
       <form
         onSubmit={sumbitHandler}

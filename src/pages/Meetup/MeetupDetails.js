@@ -1,9 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-
 import SHOWMAP from "../../components/common/Functionality/Map";
-import { host } from "../../constant/constant";
+import { host } from "../../constants/constant";
 const MeetupDetails = () => {
   const [meetup, setMeetup] = useState(null);
   const token = localStorage.getItem("token");
@@ -43,21 +42,21 @@ const MeetupDetails = () => {
       <div className="flex flex-grow flex-col py-20 max-container ">
         <main className="flex flex-grow flex-col items-center justify-between pt-5">
           <div className="px-5 w-full border-b border-shadowColor bg-white py-2 lg:py-6">
-            <div className="md:max-w-screen mx-auto">
-              <h1 class="overflow-hidden overflow-ellipsis text-3xl font-bold leading-snug">
+            <div className="md:max-w-screen mx-auto py-5">
+              <h1 class="overflow-hidden overflow-ellipsis text-2xl font-bold leading-snug">
                 Stories of Sourcing from the World
               </h1>
-              <div className="border-b px-5">
-                <h1 className="text-3xl">{meetup.name}</h1>
-                <div className="flex flex-col">
-                  <h2>Hosted by</h2>
-                  <h2>{meetup.name}</h2>
+              <div className="flex flex-col border-b gap-2 pb-2">
+                <h1 className="text-3xl font-medium">{meetup.name}</h1>
+                <div className="flex flex-col gap-1">
+                  <p className="text-base">Hosted by</p>
+                  <p className="text-base">{meetup.name}</p>
                 </div>
               </div>
             </div>
             <div className="flex w-full flex-col items-center justify-between border-t border-gray2 bg-gray1 pb-6 lg:px-5">
               <div className="md:max-w-screen w-full bg-gray1">
-                <div className="flex flex-col-reverse lg:flex-row">
+                <div className="flex flex-col lg:flex-row">
                   <div className="flex flex-grow flex-col lg:mt-5">
                     <div className="lg:max-w-2xl"></div>
                     <div className="mt-0 w-full lg:mt-8">
@@ -69,7 +68,7 @@ const MeetupDetails = () => {
                         alt="meetup"
                       />
                     </div>
-                    <div className="px-6 sm:px-4 xl:px-0 md:max-w-screen mt-5 w-full">
+                    <div className="px-6 sm:px-4 xl:px-0 md:max-w-screen my-5 w-full">
                       <div className="mb-5 flex items-center justify-between">
                         <h2 class="text-xl font-semibold">Details</h2>
                       </div>
@@ -80,12 +79,14 @@ const MeetupDetails = () => {
                     <div className="top-24 sticky flex flex-col ">
                       <div className=" bg-slate-300 px-5 pb-3 pt-6 sm:pb-4.5 lg:py-5 lg:rounded-b-2xl lg:rounded-t-2xl ">
                         <div className="px-5 py-2 bg-red-600 rounded-md text-center text-white text-lg">
-                          Date:{meetup.date}
+                          Date : {meetup.date}
                         </div>
-                        <div className="flex flex-col max-w-xs justify-around bg-zinc-300  mx-5 mt-8 px-5 pb-3 pt-6 sm:pb-4.5 lg:py-5 lg:rounded-b-2xl lg:rounded-t-2xl">
-                          <div className="leading-normal">
-                            <h2>Date:{meetup.date}</h2>
-                            <h2 className="">Addrress:{meetup.address}</h2>
+                        <div className=" max-w-xs justify-around  mx-5 mt-8 px-5 pb-3 pt-6 sm:pb-4.5 lg:py-5 lg:rounded-b-2xl lg:rounded-t-2xl">
+                          <div className="flex flex-col leading-normal gap-5">
+                            <h2 className="text-lg">Date : {meetup.date}</h2>
+                            <h2 className="text-lg">
+                              Address : {meetup.address}
+                            </h2>
                           </div>
                         </div>
                       </div>

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "../../../Store/loginSlice";
 import useInput from "../../../Hooks/useInput";
 import { userActions } from "../../../Store/userSlice";
-import { host } from "../../../constant/constant";
+import { host } from "../../../constants/constant";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

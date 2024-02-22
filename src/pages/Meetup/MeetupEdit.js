@@ -1,11 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
 
-
 import MeetUpForm from "../../components/Meetup/MeetupForm";
 import { Loader } from "lucide-react";
 import useApi from "../../Hooks/useGet";
-
+import { host } from "../../constants/constant";
 const MeetupEdit = () => {
   const { id } = useParams();
   const token = localStorage.getItem("token");
@@ -15,8 +14,10 @@ const MeetupEdit = () => {
     setIsLoading(newLoading);
     console.log("loading" + newLoading);
   };
-  const url = "meetup/get-meetup";
-  const { meetup } = useApi(url, token, id);
+  console.log(host);
+  const url = `meetups/${id}`;
+  const fetchUrl = `meetup/get-meetup`;
+  const { meetup } = useApi(fetchUrl, token, id);
 
   return (
     <Fragment>
@@ -30,24 +31,21 @@ const MeetupEdit = () => {
         </div>
       )}
       <div className="w-full flex xl:flex-row  gap-10 max-container pt-16 bg-white">
-        <div className=" w-full xl:w-4/5 flex flex-col justify-center items-center gap-10  ">
-          <div className="flex flex-col my-20">
-            <div className="m-3 justify-end ">
-              <img
-                className="w-[500px] h-[200px] rounded-lg"
-                alt="meetup"
-                src={meetup.image}
-              />
-            </div>
-            <div className="m-4">
-              <MeetUpForm
-                url={url}
-                isEdit={true}
-                meetup={meetup}
-                handleLoadingChange={handleLoadingChange}
-              />
-            </div>
+        <div className="flex flex-col my-20 w-full justify-center ">
+          <div className="m-3 px-[4rem] ">
+            <img
+              className="w-[500px] h-[200px] rounded-lg"
+              alt="meetup"
+              src={meetup.image}
+            />
           </div>
+
+          <MeetUpForm
+            url={url}
+            isEdit={true}
+            meetup={meetup}
+            handleLoadingChange={handleLoadingChange}
+          />
         </div>
         {/* <div className="w-full xl:w-2/5 relative m-4">
           <div className="flex items-center justify-center mt-40 p-20  border-2 border-orange-700 ">

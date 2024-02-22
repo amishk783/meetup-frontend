@@ -1,7 +1,7 @@
 import { Fragment, useState } from "react";
 import { Loader } from "lucide-react";
-import { host } from "../../constant/constant";
-import groupImage from "../../assests/images/group-img.jpg";
+import { host } from "../../constants/constant"
+
 import MeetUpForm from "../../components/Meetup/MeetupForm";
 
 const Meetup = () => {

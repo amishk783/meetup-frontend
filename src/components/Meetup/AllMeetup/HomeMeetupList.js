@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeMeetupListItem from "./HomeMeetupListItem";
 import SkeletonLoader from "../../common/Functionality/SkeletoonLoader";
-import { host } from "../../../constant/constant";
+import { host } from "../../../constants/constant"
 import FeedBackToast from "../../common/Functionality/FeedBackToast";
 
 const HomeMeetupList = ({ selectedFilter }) => {

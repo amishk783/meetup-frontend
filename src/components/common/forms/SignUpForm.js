@@ -5,7 +5,7 @@ import useInput from "../../../Hooks/useInput";
 import { loginActions } from "../../../Store/loginSlice";
 import { useState } from "react";
 import { userActions } from "../../../Store/userSlice";
-import { host } from "../../../constant/constant";
+import { host } from "../../../constants/constant";
 
 const SignUpForm = (props) => {
   const dispatch = useDispatch();
