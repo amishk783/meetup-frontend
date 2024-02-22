@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "../../components/common/Header/Header";
-import Footer from "../../components/common/Footer/Footer";
+
 
 import MeetUpForm from "../../components/Meetup/MeetupForm";
 import { Loader } from "lucide-react";
@@ -18,10 +17,9 @@ const MeetupEdit = () => {
   };
   const url = "meetup/get-meetup";
   const { meetup } = useApi(url, token, id);
-  
+
   return (
     <Fragment>
-      <Header />
       {isLoading && (
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 animate-bounce">
           <Loader
@@ -57,8 +55,6 @@ const MeetupEdit = () => {
           </div>
         </div> */}
       </div>
-
-      <Footer />
     </Fragment>
   );
 };

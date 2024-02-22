@@ -1,15 +1,10 @@
-import { Fragment } from "react";
-import Header from "../../components/common/Header/Header"
-import Footer from "../../components/common/Footer/Footer";
-import SignUpForm from "../../components/common/forms/SignUpForm"
+import SignUpForm from "../../components/common/forms/SignUpForm";
 
 const Signup = () => {
   return (
-    <Fragment>
-      <Header />
-      <SignUpForm />
-      <Footer/>
-    </Fragment>
+    <div className="flex m-auto p-20 w-full">
+      <SignUpForm />;
+    </div>
   );
 };
 export default Signup;

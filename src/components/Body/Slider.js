@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import groupImage from "./group-img.jpg";
 const Slider = () => {
   return (
@@ -12,7 +13,7 @@ const Slider = () => {
           Daily events are unfolding — become a part of the excitement.
         </p>
         <button className="pr-4 mt-5 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md">
-          Join Meetup
+          <Link to="/signup">Join Meetup</Link>
         </button>
       </div>
       <div className="relative isolate">

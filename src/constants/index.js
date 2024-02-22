@@ -1,13 +1,13 @@
-import cardimg from "./cardimg.jpg";
-import games from './icon/games.png'
-import travel from "./icon/travel.png";
-import sports from "./icon/sports.png";
-import hobby from "./icon/hobby.png";
-import robot from './icon/robot.png'
-import meetupblog_1 from './icon/meetupblog_1.jpg'
-import meetupblog_2 from './icon/meetupblog_2.jpg'
-import meetupblog_3 from "./icon/meetupblog_3.jpg";
 
+import games from "../assests/games.png"
+import travel from "../assests/travel.png";
+import sports from "../assests/sports.png";
+import hobby from "../assests/hobby.png";
+import robot from "../assests/robot.png";
+
+import article1 from "../assests/images/article-1.jpg";
+import article2 from "../assests/images/article-2.jpg";
+import article3 from "../assests/images/article-3.jpg";
 
 export const footerlinks = [
   {
@@ -35,36 +35,7 @@ export const footerlinks = [
     ],
   },
 ];
-export const meetupDetails = [
-  {
-    id: 1,
-    title: 'Kanpur - The Answer of "Why We Live?" in Buddhism',
-    image: cardimg,
-    hostedby: "kanpur",
-    date: "Sat,Oct 28",
-  },
-  {
-    id: 2,
-    title: 'Jaipur - The Answer of "Why We Live?" in Buddhism',
-    image: cardimg,
-    hostedby: "kanpur",
-    date: "Sat,Oct 28",
-  },
-  {
-    id: 3,
-    title: 'Delhi- The Answer of "Why We Live?" in Buddhism',
-    image: cardimg,
-    hostedby: "kanpur",
-    date: "Sat,Oct 28",
-  },
-  {
-    id: 4,
-    title: 'India - The Answer of "Why We Live?" in Buddhism',
-    image: cardimg,
-    hostedby: "kanpur",
-    date: "Sat,Oct 28",
-  },
-];
+
 
 export const categoriesDetails = [
   {
@@ -97,18 +68,18 @@ export const meetupBlog = [
     title: "I Used Meetup to Make Friends at Brunch",
     description:
       "New Jersey-based writer and college student Brianna Stryker wanted to meet friends in her hometown. Learn how she used Meetup to make connections by joining a Girls Night Out Meetup group.",
-    image: meetupblog_1,
+    image: article1,
   },
   {
     title: "How to Turn Casual Connections into Close Friendships",
     description:
       "It’s proven that close friendships are harder to make as an adult. But don’t sweat it: here’s what you can do to simplify the process.",
-    image: meetupblog_2,
+    image: article2,
   },
   {
     title: "Do You Have the “Right” Number of Friends?",
     description:
       "Studies from around the world have tried to help people answer this question. Learn about the three tiers of friendship and how to fulfill them.",
-    image: meetupblog_3,
+    image: article3,
   },
 ];

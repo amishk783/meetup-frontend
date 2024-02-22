@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import MeetupCard from "./MeetupCard";
-
+import { host } from "../../constant/constant";
 const UpcomigMeetup = () => {
   const [meetupDetails, setmeetupList] = useState([]);
 
   useEffect(() => {
     const fetchMeetup = async () => {
-      const url =
-        "https://meetup-backend-d94fd9d78c46.herokuapp.com/meetup/get-all-meetups";
+      const url = `${host}/meetup/get-all-meetups`;
       try {
         const response = await fetch(url, {
           method: "GET",

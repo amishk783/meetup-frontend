@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import {loginActions} from "../../../Store/loginSlice";
+import { loginActions } from "../../../Store/loginSlice";
 import NavBar from "./NavBar";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -13,7 +13,6 @@ const Header = () => {
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(null);
 
-  console.log(isLogin);
   const handleLogout = () => {
     dispatch(loginActions.logout());
     navigate("/home");
@@ -22,7 +21,7 @@ const Header = () => {
     <header className=" py-3 bg-[#f5deb3] lg:hover:bg-transparent absolute z-10 w-full text-white shadow-md">
       <nav className="flex justify-between items-center xl:max-container">
         <div className="mx-8 flex justify-start">
-          <Link to="/Home">
+          <Link to="/home">
             <h1 className=" text-slate-950 text-3xl font-semibold">Meetup</h1>
           </Link>
         </div>

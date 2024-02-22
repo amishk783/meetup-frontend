@@ -1,28 +1,26 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useState } from "react";
-import Header from "../components/common/Header/Header";
-import Footer from "../components/common/Footer/Footer";
+import { useNavigate } from "react-router-dom";
 import HomeMeetupList from "../components/Meetup/AllMeetup/HomeMeetupList";
 import DatePicker from "../components/common/DatePicker";
 import Filter from "../components/common/Functionality/Filter";
 
 const HomeLogin = () => {
+  const navigate=useNavigate();
   const user = useSelector((state) => state.user.user);
 
   const [filter, setFilter] = useState("Today");
 
-
   const handleFilter = (e) => {
     setFilter(e.target.value);
-  }
-  console.log(filter);
-  
+  };
+  if (!user) { navigate("/signup"); }
+
   const username = user.name;
 
   return (
     <Fragment>
-      <Header />
       <div className="max-container pt-12 flex flex-grow flex-col z-10 ">
         <div className="relative flex flex-grow flex-col items-center pt-12">
           <div className=" sm:px-4 xl:px-4 mx-auto mt-6 w-full px-4 pb-14 md:max-w-screen-xl lg:px-10 ">
@@ -48,8 +46,8 @@ const HomeLogin = () => {
                   <h3 className="border-b-2 border-gray5 pb-3 text-xl font-medium capitalize md:text-xl">
                     Today
                   </h3>
-                  <Filter handleFilter={handleFilter}/>
-                  <HomeMeetupList />
+                  <Filter handleFilter={handleFilter} />
+                  <HomeMeetupList selectedFilter={filter} />
                 </div>
               </div>
               <div className="sticky top-24 hidden h-[652px] w-[160px] pt-4 xl:block"></div>
@@ -57,7 +55,6 @@ const HomeLogin = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </Fragment>
   );
 };

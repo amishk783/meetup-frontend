@@ -1,4 +1,4 @@
-import { Fragment, useEffect } from "react";
+import { Fragment } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -13,19 +13,17 @@ import AboutUs from "./pages/AboutUs";
 import UserEvent from "./pages/UserEvent";
 import MeetupDetails from "./pages/Meetup/MeetupDetails";
 import MeetupEdit from "./pages/Meetup/MeetupEdit";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const dispatch = useDispatch();
+
   const isLogin = useSelector((state) => state.login.isAuthenthicated);
-  console.log(isLogin);
 
   const redirectNav = (to) => <Navigate to={to} replace />;
 
   return (
     <Fragment>
       <Routes>
-        {/* <Route path="/" element={<Home />}></Route> */}
-
         <Route path="/" element={redirectNav("/home")} />
         <Route path="home/">
           <Route index element={isLogin ? <HomeLogin /> : <Home />} />
@@ -39,12 +37,12 @@ function App() {
             <Route index element={<UserEvent />}></Route>
             <Route path=":id" element={<MeetupDetails />}></Route>
             <Route path="edit/:id" element={<MeetupEdit />} />
-            <Route path="*" element={<ContactUs />}></Route>
           </Route>
         )}
 
         <Route path="/contact-us" element={<ContactUs />}></Route>
         <Route path="/about-us" element={<AboutUs />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </Fragment>
   );

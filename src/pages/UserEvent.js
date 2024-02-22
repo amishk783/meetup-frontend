@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../components/common/Header/Header";
-import Footer from "../components/common/Footer/Footer";
+
 import UserMeetupCard from "../components/UserMeetup/UserMeetupCard";
 import { host } from "../constant/constant";
+import SkeletonLoader from "../components/common/Functionality/SkeletoonLoader";
 
 const UserEvent = () => {
   const [meetups, setMeetup] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
+      // setIsLoading(true);
       const url = `${host}/meetup/get-meetups`;
       try {
         const response = await fetch(url, {
@@ -29,6 +32,7 @@ const UserEvent = () => {
       } catch (error) {
         console.log(error);
       }
+      // setIsLoading(false);
     };
     fetchData().catch((error) => {
       console.log(error);
@@ -38,7 +42,6 @@ const UserEvent = () => {
   const meetupClickHandler = (id) => {
     console.log("clicked");
     navigate(`${id}`);
-    // <Link to={`your-meetup/${id}`} />
   };
   const meetupEditHandler = (id) => {
     navigate(`edit/${id}`);
@@ -49,7 +52,7 @@ const UserEvent = () => {
     setMeetup((prevMeetup) => prevMeetup.filter((meetup) => meetup.id !== id));
     console.log(meetups);
     try {
-      const url = "http://localhost:3003/meetup/delete-meetup";
+      const url = `${host}/meetup/delete-meetup`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
@@ -69,7 +72,6 @@ const UserEvent = () => {
   };
   return (
     <div className="flex flex-col  h-screen">
-      <Header />
       <div className="flex-1 my-20 ">
         <div className="max-container  pt-12 pb-8">
           <div className="flex flex-col xl:flex-row justify-between items-start">
@@ -85,7 +87,9 @@ const UserEvent = () => {
             </div>
             <div className="w-full max-sm:pr-8 overflow-hidden">
               <h1 className="text-3xl p-4 mt-2">Your Events</h1>
-              {meetups.map((meetup) => (
+              {meetups && meetups.map((meetup) => (
+                // !isLoading && <SkeletoonLoader />;
+                // return (
                 <UserMeetupCard
                   key={meetup.id}
                   id={meetup.id}
@@ -98,12 +102,13 @@ const UserEvent = () => {
                   onRemove={meetupRemoveHandler}
                   onEdit={meetupEditHandler}
                 />
+                // );
               ))}
+              
             </div>
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

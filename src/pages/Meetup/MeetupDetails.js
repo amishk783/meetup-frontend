@@ -1,8 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import Header from "../../components/common/Header/Header";
-import Footer from "../../components/common/Footer/Footer";
+
 import SHOWMAP from "../../components/common/Functionality/Map";
 import { host } from "../../constant/constant";
 const MeetupDetails = () => {
@@ -41,7 +40,6 @@ const MeetupDetails = () => {
 
   return (
     <Fragment>
-      <Header />
       <div className="flex flex-grow flex-col py-20 max-container ">
         <main className="flex flex-grow flex-col items-center justify-between pt-5">
           <div className="px-5 w-full border-b border-shadowColor bg-white py-2 lg:py-6">
@@ -53,7 +51,7 @@ const MeetupDetails = () => {
                 <h1 className="text-3xl">{meetup.name}</h1>
                 <div className="flex flex-col">
                   <h2>Hosted by</h2>
-                  <h2>{meetup.id}</h2>
+                  <h2>{meetup.name}</h2>
                 </div>
               </div>
             </div>
@@ -102,7 +100,6 @@ const MeetupDetails = () => {
           </div>
         </main>
       </div>
-      <Footer />
     </Fragment>
   );
 };

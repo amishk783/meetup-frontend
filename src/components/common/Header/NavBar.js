@@ -5,7 +5,7 @@ const NavBar = () => {
   const isLogin = useSelector((state) => state.login.isAuthenthicated);
 
   return (
-    <ul className="flex flex-1 justify-center items-center gap-16 max-sm:flex-col max-sm:gap-6 ">
+    <ul className="flex flex-1 justify-center items-center gap-5 lg:gap-16 max-lg:flex-col max-sm:gap-6 ">
       <li className=" ">
         <Link
           to="/home"
@@ -23,6 +23,9 @@ const NavBar = () => {
         <Link to={`/${!isLogin ? "contact-us" : "add-meetup"}`}>
           {`${!isLogin ? "Contact Us" : "Add Meetup"}`}
         </Link>
+      </li>
+      <li className="lg:hidden font-monsterrat leading-normal text-lg text-slate-gray hover:text-red-900 max-sm:gap-6 ">
+        <Link to="signup">Sign up</Link>
       </li>
     </ul>
   );

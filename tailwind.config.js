@@ -31,15 +31,12 @@ module.exports = {
       borderColor: {
         focus: "green", // You can change 'red' to the color you desire
       },
-
-      // backgroundImage: {
-      //   hero: "url('assets/images/collection-background.svg')",
-      //   card: "url('assets/images/thumbnail-background.svg')",
-      // },
+      backgroundImage: {
+        "meetup-bg": "url('/src/assests/images/group-img.jpg')",
+      },
       screens: {
         wide: "1440px",
       },
-     
     },
   },
   plugins: [],

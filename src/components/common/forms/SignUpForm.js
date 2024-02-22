@@ -48,14 +48,12 @@ const SignUpForm = (props) => {
       body: JSON.stringify({ enteredEmail, enteredName, enteredPassword }),
     });
     const data = await response.json();
-    console.log(data);
+
     const user = data.user;
-    console.log(user);
 
     if (response.ok) {
-  
-      dispatch(loginActions.login(data.token));   //settoken
-      dispatch(userActions.setUser(user));        //setuser
+      dispatch(loginActions.login(data.token)); //settoken
+      dispatch(userActions.setUser(user)); //setuser
       navigate("/home");
     }
     if (response.status === 409) {

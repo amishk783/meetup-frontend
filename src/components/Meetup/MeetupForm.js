@@ -1,5 +1,4 @@
-
-import { FormLabel,TextField } from "@mui/material";
+import { FormLabel, TextField } from "@mui/material";
 
 import { useState, useMemo, useEffect } from "react";
 import useInput from "../../Hooks/useInput";
@@ -13,13 +12,13 @@ import FeedBackToast from "../common/Functionality/FeedBackToast";
 const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
   const [currentMeetup, setCurrentMeetup] = useState(meetup);
 
-  const [formError, setFormError] = useState(true);
+  const [formError, setFormError] = useState(false);
   const [eventImage, setEventImage] = useState(null);
   const token = localStorage.getItem("token");
   const [shouldUpload, setShouldUpload] = useState(null); // to decide if upload should be done or not
   const [date, setDate] = useState(null);
   const navigate = useNavigate();
-  const [meetupError, setMeetupError] = useState(true);
+  const [meetupError, setMeetupError] = useState(false);
   const [createdSuccessfully, setCreatedSuccessfully] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -76,7 +75,6 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
 
   const formattedDate = moment(date).format("DD-MM-YYYY");
 
-  console.log(formattedDate)
   const formData = useMemo(() => {
     const data = new FormData();
     data.append("enteredAddress", enteredAddress);
@@ -99,6 +97,7 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
       try {
         setIsLoading(true);
         handleLoadingChange(true);
+        setMeetupError(false);
 
         const method = isEdit ? "PUT" : "POST";
         const response = await fetch(isEdit ? `${url}/${meetup.id}` : url, {
@@ -112,6 +111,8 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
         if (!response.ok) {
           console.log("Error:", response.status);
           setFormError(true);
+          setIsLoading(false);
+          setMeetupError(true);
         }
 
         const data = await response.json();
@@ -120,10 +121,9 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
           setCreatedSuccessfully(true);
 
           const timeoutId = setTimeout(() => {
-            setCreatedSuccessfully(false);
+            setCreatedSuccessfully(true);
             navigate("/home");
           }, 3000);
-          navigate("/home");
           return () => {
             handleLoadingChange(false);
             setIsLoading(false);
@@ -134,7 +134,8 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
       } catch (error) {
         console.log("Error file loading", error);
         setMeetupError(true);
-      } finally {
+        handleLoadingChange(false);
+        setIsLoading(false);
       }
     };
     uploadData();
@@ -151,33 +152,39 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     setIsLoading,
     isLoading,
   ]);
+ 
+
+  const displayImage = eventImage ? eventImage.name : "Choose a file";
 
   return (
-    <div className="relative xl:3/5 flex flex-col justify-center max-xl:padding-x align-middle gap-5 max-container border-2 rounded-lg px-20 py-10 border-green-300 drop-shadow-xl shadow-xl">
-      {!(meetupError || formError) && (
-        <div className="border bg-red rounded-full">
-          <FeedBackToast
-            message={"Form Subimission Failed"}
-            isOpen={true}
-            code={"failure"}
-          />
-        </div>
+    <div className="relative xl:3/5 flex flex-col justify-center gap-5  rounded-lg px-20 w-3/5 ">
+      {(meetupError || formError) && (
+        <FeedBackToast
+          message={"Form Subimission Failed"}
+          isOpen={true}
+          code={"failure"}
+        />
       )}
       {createdSuccessfully && (
-        <div className="border bg-green rounded-full">
-          <FeedBackToast
-            message={"Meetup created successfully"}
-            isOpen={true}
-            code={"success"}
-          />
-        </div>
+        <FeedBackToast
+          message={"Meetup created successfully"}
+          isOpen={true}
+          code={"success"}
+        />
       )}
+      <div className=" border-b-[1px] border-zinc-400 pb-3 ">
+        <h1 className="text-3xl font-medium font-sans ">Create an Event</h1>
+        <p>Let's put your event infront of world!!</p>
+      </div>
 
       <form
         onSubmit={sumbitHandler}
-        className="relative xl:3/5 flex flex-col justify-center max-xl:padding-x align-middle gap-5 max-container"
+        className="relative flex flex-col  gap-5 w-5/6  "
       >
-        <FormLabel className="items-start justify-start text-start font-palanquin pb-2">
+        <FormLabel
+          style={{ color: "black" }}
+          className="items-start justify-start text-start font-palanquin pb-2"
+        >
           Your Name
         </FormLabel>
         <TextField
@@ -191,7 +198,7 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
           onBlur={nameBlurHandler}
         ></TextField>
 
-        <FormLabel>Event Address</FormLabel>
+        <FormLabel style={{ color: "black" }}>Event Address</FormLabel>
         <TextField
           type="text"
           value={enteredAddress}
@@ -201,20 +208,28 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
           onBlur={addressBlurHandler}
         ></TextField>
 
-        <FormLabel>Event's Poster</FormLabel>
-        <div className="border-2 border-slate-700 rounded-md py-3 px-6 flex">
+        <FormLabel style={{ color: "black" }} color="error">
+          Event's Poster
+        </FormLabel>
+        <div className="border-2 border-gray-300 rounded-md py-4 px-6 flex">
+          <h1 className="text-lg font-medium absolute -z-10 text-violet-700 flex gap-5">
+            <span>
+              <Camera />
+            </span>
+            {displayImage}
+          </h1>
           <input
-            className="opacity-0 w-full z-5 mb-[-10px] flex-1"
+            className="opacity-0 w-full z-5 mb-[-10px] flex-1 outline-none z-10"
             type="file"
             name="image"
             id="image"
             accept="/image*"
             onChange={(e) => {
-              setEventImage(e.target.files[0]);
+              if (e.target.files[0]) setEventImage(e.target.files[0]);
             }}
+            placeholder={displayImage}
             alt="event poster image"
           ></input>
-          <Camera />
         </div>
         <FormLabel>Event's Date</FormLabel>
 
