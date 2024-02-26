@@ -59,10 +59,10 @@ const HomeMeetupList = ({ selectedFilter }) => {
           isLoading ? (
             <SkeletonLoader />
           ) : (
-            <Link key={meetup.id} to={`meetups/${meetup.id}`}>
+            <Link key={meetup.id} to={`/${meetup.id}`}>
               <HomeMeetupListItem
                 key={meetup.id}
-                name={meetup.name}
+                name={meetup.title}
                 description={meetup.description}
                 address={meetup.address}
                 image={meetup.image}

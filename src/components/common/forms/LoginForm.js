@@ -34,7 +34,7 @@ const LoginForm = () => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-
+    setafterPasswordError(false);
     if (enteredEmailIsValid && enteredPasswordIsValid) {
       setSendDetail(true);
     }
@@ -44,6 +44,7 @@ const LoginForm = () => {
     if (!sendDetail) {
       return;
     }
+  
     const upload = async () => {
       const url = `${host}/users/login`;
 
@@ -52,6 +53,9 @@ const LoginForm = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ enteredEmail, enteredPassword }),
       });
+      if (!response.ok) {
+        setafterPasswordError(true);
+      }
 
       const data = await response.json();
       console.log(data);
@@ -63,7 +67,7 @@ const LoginForm = () => {
         dispatch(userActions.setUser(user));
         navigate("/home");
         setafterPasswordError(true);
-      } else if (data.message === "Invalid Password") {
+      } else {
         setafterPasswordError(true);
       }
     };
@@ -76,6 +80,7 @@ const LoginForm = () => {
     navigate,
     dispatch,
   ]);
+  console.log(afterPasswordError);
   const emailInputClass = emailInputError
     ? "border-red-500 bg-red-100"
     : "border-slate-700 focus:scale-105 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200";
@@ -86,6 +91,11 @@ const LoginForm = () => {
   return (
     <section className="max-container w-full flex flex-grow justify-center pt-16 my-12 pb-20 xl:flex-row">
       <div className="pb-5">
+        {afterPasswordError && (
+          <div className="border-2 px-3 mx-8 mb-4 py-2 flex justify-center ring ring-red-200 border-red-300 bg-red-100 rounded-md">
+            Wrong Password
+          </div>
+        )}
         <form
           onSubmit={formSubmitHandler}
           className="relative xl:3/5 flex flex-col justify-center items-center max-xl:padding-x max-container align-middle mt-12 pt-12"

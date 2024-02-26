@@ -7,7 +7,7 @@ import DatePicker from "../components/common/DatePicker";
 import Filter from "../components/common/Functionality/Filter";
 
 const HomeLogin = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
 
   const [filter, setFilter] = useState("Today");
@@ -15,7 +15,9 @@ const HomeLogin = () => {
   const handleFilter = (e) => {
     setFilter(e.target.value);
   };
-  if (!user) { navigate("/signup"); }
+  if (!user) {
+    navigate("/signup");
+  }
 
   const username = user.name;
 
@@ -25,11 +27,11 @@ const HomeLogin = () => {
         <div className="relative flex flex-grow flex-col items-center pt-12">
           <div className=" sm:px-4 xl:px-4 mx-auto mt-6 w-full px-4 pb-14 md:max-w-screen-xl lg:px-10 ">
             <div className="mb-5 mt-8 flex flex-col justify-between sm:mt-4 gl:flex-row">
-              <div className="w-full">
+              <div className="w-full px-5">
                 <h1 className="text-3xl font-bold leading-10 gl:text-heading">
                   Welcome, {username}
                 </h1>
-                <h2 className="mt-10 hidden text-2xl font-semibold leading-9 gl:block">
+                <h2 className="mt-5  text-xl font-medium leading-9 ">
                   Upcoming Events
                 </h2>
               </div>

@@ -24,8 +24,15 @@ const NavBar = () => {
           {`${!isLogin ? "Contact Us" : "Add Meetup"}`}
         </Link>
       </li>
+      {!isLogin && (
+        <li className="lg:hidden font-monsterrat leading-normal text-lg text-slate-gray hover:text-red-900 max-sm:gap-6 ">
+          <Link to="signup">Sign up</Link>
+        </li>
+      )}
       <li className="lg:hidden font-monsterrat leading-normal text-lg text-slate-gray hover:text-red-900 max-sm:gap-6 ">
-        <Link to="signup">Sign up</Link>
+        <Link to={`/${!isLogin ? "login" : "logout"}`}>
+          {`${!isLogin ? "Log in" : "Log out"}`}
+        </Link>
       </li>
     </ul>
   );

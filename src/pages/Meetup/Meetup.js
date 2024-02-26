@@ -26,15 +26,15 @@ const Meetup = () => {
       <div
         className={` flex flex-col w-full gap-10 max-container   pt-10 mb-20   bg-cente`}
       >
-        <div className="w-full  bg-meetup-bg  bg-contain bg-bottom bg-no-repeat h-full pt-20 mt-20   fixed -z-10  "></div>
+        <div className="w-full  bg-meetup-bg  bg-contain xl:bg-bottom bg-no-repeat h-full pt-20 mt-20   fixed -z-10  "></div>
         <div className="mt-20 z-10  ">
-          <div className="flex xl:flex-row flex-col pt-10 gap-40">
+          <div className="flex flex-col-reverse justify-center items-center xl:items-start xl:flex-row gap-10  xl:pt-10 xl:gap-40">
             <MeetUpForm
               url={url}
               meetup={initialMeetup}
               handleLoadingChange={handleLoadingChange}
             />
-            <div className="w-[400px] p-2  rounded-md">
+            <div className="w-[350px] md:w-[450px] py-2  xl:w-[600px] rounded-md ">
               <div className="px-4 py-4 bg-amber-100 flex-col rounded-lg">
                 <h1 className="text-xl font-medium my-3">
                   {" "}

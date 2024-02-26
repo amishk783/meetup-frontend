@@ -50,7 +50,7 @@ const MeetupDetails = () => {
                 <h1 className="text-3xl font-medium">{meetup.name}</h1>
                 <div className="flex flex-col gap-1">
                   <p className="text-base">Hosted by</p>
-                  <p className="text-base">{meetup.name}</p>
+                  <p className="text-base">{meetup.hostBy}</p>
                 </div>
               </div>
             </div>

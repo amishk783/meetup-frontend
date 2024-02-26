@@ -50,7 +50,7 @@ const SignUpForm = (props) => {
     const data = await response.json();
 
     const user = data.user;
-
+    console.log(data);
     if (response.ok) {
       dispatch(loginActions.login(data.token)); //settoken
       dispatch(userActions.setUser(user)); //setuser

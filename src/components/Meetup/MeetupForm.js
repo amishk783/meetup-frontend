@@ -156,7 +156,7 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
   const displayImage = eventImage ? eventImage.name : "Choose a file";
 
   return (
-    <div className="relative xl:3/5 flex flex-col justify-center gap-5  rounded-lg px-20 w-3/5 ">
+    <div className="relative w-full xl:3/5 px-5 flex flex-col justify-center gap-5  rounded-lg xl:px-20 ">
       {(meetupError || formError) && (
         <FeedBackToast
           message={"Form Subimission Failed"}
@@ -186,7 +186,7 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
 
       <form
         onSubmit={sumbitHandler}
-        className="relative flex flex-col  gap-5 w-5/6  "
+        className="relative flex flex-col w-full  gap-5 xl:w-5/6  "
       >
         <FormLabel
           style={{ color: "black" }}
