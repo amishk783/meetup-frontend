@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import PreFooter from "./PreFooter";
-import { footerlinks } from "../../../constants/index"
+import { footerlinks } from "../../../constants/constant"
 const Footer = () => {
   return (
     <footer className=" bg-zinc-800">

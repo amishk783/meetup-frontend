@@ -1,7 +1,6 @@
 import { Fragment } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 import Home from "./pages/Home";
 import MeetUp from "./pages/Meetup/Meetup";
@@ -14,9 +13,10 @@ import UserEvent from "./pages/UserEvent";
 import MeetupDetails from "./pages/Meetup/MeetupDetails";
 import MeetupEdit from "./pages/Meetup/MeetupEdit";
 import NotFound from "./pages/NotFound";
+import ResetPassword from "./pages/auth/ResetPassword";
+import Password from "./pages/auth/Password";
 
 function App() {
-
   const isLogin = useSelector((state) => state.login.isAuthenthicated);
 
   const redirectNav = (to) => <Navigate to={to} replace />;
@@ -31,6 +31,11 @@ function App() {
         </Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/forgotpassword" element={<ResetPassword />}></Route>
+        <Route
+          path="/forgotpassword/:userId/:token"
+          element={<Password />}
+        ></Route>
         {isLogin && <Route path="/add-meetup" element={<MeetUp />}></Route>}
         {isLogin && (
           <Route path="/your-meetup/">

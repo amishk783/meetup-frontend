@@ -1,37 +1,38 @@
 import { useState, useEffect } from "react";
-import { host } from "../constants/constant"
-const useGetFetch = (url, token, id) => {
-  const [meetup, setMeetup] = useState([]);
-  console.log(url);
+import { host } from "../constants/constant";
+const useGet = (url, token = null, id = null) => {
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
-    const prepopulateFetch = async () => {
+    const Fetch = async () => {
       const fetchUrl = `${host}/${url}`;
       try {
         const response = await fetch(fetchUrl, {
-          method: "POST",
+          method: "GET",
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token} `,
           },
-          body: JSON.stringify({ id }),
         });
         const data = await response.json();
-        console.log(data.meetup);
-        if (!response.ok) console.log(data.message);
 
-        setMeetup(data.meetup);
+        if (!response.ok) throw new Error("Something went wrong!");
+
+        setData(data.meetup);
+        setIsLoading(false);
       } catch (error) {
-        console.log(error);
+        setError(true);
       }
     };
-    prepopulateFetch().catch((error) => {
-      console.log(error);
-    });
+    Fetch();
   }, [token, id, url]);
-
   return {
-    meetup,
+    data,
+    isLoading,
+    error,
   };
 };
 
-export default useGetFetch;
+export default useGet;

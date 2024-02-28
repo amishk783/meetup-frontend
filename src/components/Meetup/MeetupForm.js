@@ -23,15 +23,15 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const {
-    value: enteredName,
+    value: enteredTitle,
     isValid: enteredNameIsValid,
-    hasError: nameInputError,
-    valueChangeHandler: nameChangeHandler,
-    isTouchHandler: nameBlurHandler,
-    reset: resetName,
+    hasError: titleInputError,
+    valueChangeHandler: titleChangeHandler,
+    isTouchHandler: titleBlurHandler,
+    reset: resetTitle,
   } = useInput(
     (value) => value.trim() !== "",
-    isEdit ? currentMeetup.name : " "
+    isEdit ? currentMeetup.title : " "
   );
   const {
     value: enteredAddress,
@@ -71,6 +71,9 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     ) {
       setShouldUpload(true);
     }
+    resetAddress();
+    resetDescription();
+    resetTitle();
   };
 
   const formattedDate = moment(date).format("DD-MM-YYYY");
@@ -78,14 +81,14 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
   const formData = useMemo(() => {
     const data = new FormData();
     data.append("enteredAddress", enteredAddress);
-    data.append("enteredName", enteredName);
+    data.append("enteredName", enteredTitle);
     data.append("enteredDescription", enteredDescription);
     data.append("image", eventImage);
     data.append("date", formattedDate);
     return data;
   }, [
     enteredAddress,
-    enteredName,
+    enteredTitle,
     enteredDescription,
     eventImage,
     formattedDate,
@@ -192,17 +195,17 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
           style={{ color: "black" }}
           className="items-start justify-start text-start font-palanquin pb-2"
         >
-          Your Name
+          Enter the title of the event
         </FormLabel>
         <TextField
           type="text"
           fullWidth
           id="fullWidth"
-          value={enteredName}
-          color={nameInputError ? "primary" : "secondary"}
+          value={enteredTitle}
+          color={titleInputError ? "primary" : "secondary"}
           variant="outlined"
-          onChange={nameChangeHandler}
-          onBlur={nameBlurHandler}
+          onChange={titleChangeHandler}
+          onBlur={titleBlurHandler}
         ></TextField>
 
         <FormLabel style={{ color: "black" }}>Event Address</FormLabel>

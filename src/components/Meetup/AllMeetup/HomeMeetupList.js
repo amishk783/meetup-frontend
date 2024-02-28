@@ -1,43 +1,15 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import useGet from "../../../Hooks/useGet";
 import HomeMeetupListItem from "./HomeMeetupListItem";
-import SkeletonLoader from "../../common/Functionality/SkeletoonLoader";
-import { host } from "../../../constants/constant"
+import SkeletonLoader from "../../ui/SkeletoonLoader";
+
 import FeedBackToast from "../../common/Functionality/FeedBackToast";
 
 const HomeMeetupList = ({ selectedFilter }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [meetupList, setmeetupList] = useState([]);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchMeetup = async () => {
-      setIsLoading(true);
-      const url = `${host}/meetup/get-all-meetups`;
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+  
+  const { data: meetups, isLoading, error } = useGet("meetup/get-all-meetups");
 
-        const data = await response.json();
-        console.log(data);
-        setmeetupList(data.meetup);
-      } catch (error) {
-        console.log(error);
-        setError(true);
-
-      }
-      setIsLoading(false);
-    };
-
-    fetchMeetup().catch((error) => {
-      console.log(error);
-    });
-  }, []);
-
-  const sortedArray = [...meetupList];
+  const sortedArray = [...meetups];
 
   if (selectedFilter === "Today") {
     sortedArray.filter(
@@ -48,9 +20,6 @@ const HomeMeetupList = ({ selectedFilter }) => {
   } else if (selectedFilter === "Far") {
     sortedArray.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
-  console.log(meetupList.length);
-
-  console.log(sortedArray);
 
   return (
     <div className="grid grid-rows-4 pt-12 md:mx-5">
@@ -59,7 +28,7 @@ const HomeMeetupList = ({ selectedFilter }) => {
           isLoading ? (
             <SkeletonLoader />
           ) : (
-            <Link key={meetup.id} to={`/${meetup.id}`}>
+            <Link key={meetup.id} to={`meetups/${meetup.id}`}>
               <HomeMeetupListItem
                 key={meetup.id}
                 name={meetup.title}

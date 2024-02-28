@@ -22,7 +22,7 @@ const Header = () => {
       <nav className="flex justify-between items-center xl:max-container">
         <div className="mx-8 flex justify-start">
           <Link to="/home">
-            <h1 className=" text-slate-950 text-3xl font-semibold">Meetup</h1>
+            <h1 className=" text-slate-950 text-3xl font-semibold">Catchup</h1>
           </Link>
         </div>
         <div className="max-lg:hidden">

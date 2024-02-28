@@ -1,46 +1,20 @@
-import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { ArrowLeft } from "lucide-react";
-import UserMeetupCard from "../components/UserMeetup/UserMeetupCard";
+import UserMeetupCard from "../components/ui/UserMeetupCard";
 import { host } from "../constants/constant";
 import noMeetupfound from "../assests/images/meetupnotfound.jpg";
+import useGet from "../Hooks/useGet";
 
-import SkeletonLoader from "../components/common/Functionality/SkeletoonLoader";
+import SkeletonLoader from "../components/ui/SkeletoonLoader";
+import FeedBackToast from "../components/common/Functionality/FeedBackToast";
 
 const UserEvent = () => {
-  const [meetups, setMeetup] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const url = `meetup/get-meetups`;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      // setIsLoading(true);
-      const url = `${host}/meetup/get-meetups`;
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token} `,
-          },
-        });
-        if (!response.ok) {
-          console.log("something went wrong");
-        }
-        const data = await response.json();
-        setMeetup(data.allmeetup);
-      } catch (error) {
-        console.log(error);
-      }
-      // setIsLoading(false);
-    };
-    fetchData().catch((error) => {
-      console.log(error);
-    });
-  }, [token]);
+  const { data: meetups, isLoading, error } = useGet(url, token);
 
   const meetupClickHandler = (id) => {
     console.log("clicked");
@@ -49,11 +23,11 @@ const UserEvent = () => {
   const meetupEditHandler = (id) => {
     navigate(`edit/${id}`);
   };
-  console.log(meetups);
+
   const meetupRemoveHandler = async (id) => {
     console.log("click" + id);
-    setMeetup((prevMeetup) => prevMeetup.filter((meetup) => meetup.id !== id));
-    console.log(meetups);
+    meetups((prevMeetup) => prevMeetup.filter((meetup) => meetup.id !== id));
+
     try {
       const url = `${host}/meetup/delete-meetup`;
       const response = await fetch(url, {
@@ -76,8 +50,14 @@ const UserEvent = () => {
   return (
     <div className="flex flex-col">
       <div className="flex-1 my-20 ">
-        <div className="max-container  pt-12 pb-8">
-          <div className="flex flex-col xl:flex-row justify-between items-start">
+        <div className="max-container pt-12 pb-40">
+          <div className="flex flex-col xl:flex-row justify-between items-start pb-40">
+            {error &&
+              FeedBackToast(
+                "Something went wrong, please try again later",
+                true,
+                "failure"
+              )}
             <div className="mx-4 xl:m-1 xl:block xl:w-1/3">
               <div className="flex items-center bg-slate-400 px-3 py-2 rounded-md text-xl gap-1  xl:m-20 xl:pl-10 xl:text-3xl">
                 <ArrowLeft />
@@ -86,12 +66,13 @@ const UserEvent = () => {
                 </Link>
               </div>
             </div>
-            <div className="w-full xl:max-container max-sm:pr-8overflow-hidden">
+            <div className="w-full pb-48 xl:max-container max-sm:pr-8 overflow-hidden">
               <h1 className="text-3xl p-4 mt-2">Your Events</h1>
               {meetups &&
-                meetups.map((meetup) => (
-                  <>
-                    !isLoading && <SkeletonLoader />
+                meetups.map((meetup) =>
+                  isLoading ? (
+                    <SkeletonLoader />
+                  ) : (
                     <UserMeetupCard
                       key={meetup.id}
                       id={meetup.id}
@@ -104,8 +85,8 @@ const UserEvent = () => {
                       onRemove={meetupRemoveHandler}
                       onEdit={meetupEditHandler}
                     />
-                  </>
-                ))}
+                  )
+                )}
               {!meetups && (
                 <div className="flex flex-col items-center  py-10  ">
                   <img
