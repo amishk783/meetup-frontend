@@ -6,7 +6,7 @@ import { MapPin } from "lucide-react";
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX;
 
-const SHOWMAP = ({ address }) => {
+const SHOWMAP = ({ address, w, h }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [error, setError] = useState({
@@ -68,7 +68,7 @@ const SHOWMAP = ({ address }) => {
     <div className="">
       <div className="relative flex items-center justify-center  border-red-600 rounded-lg overflow-hidden">
         <div className="absolute z-10 ">
-        {isLoading && (
+          {isLoading && (
             <p className=" text-green-400 text-center">
               <Loader className=" animate-spin" size={48} />
             </p>
@@ -77,8 +77,8 @@ const SHOWMAP = ({ address }) => {
         <div className="-z-10">
           <ReactMapGl
             style={{
-              width: 500,
-              height: 350,
+              width: w,
+              height: h,
             }}
             {...viewport}
             // initialViewState={viewport}

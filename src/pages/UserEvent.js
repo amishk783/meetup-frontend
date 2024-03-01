@@ -76,7 +76,7 @@ const UserEvent = () => {
                     <UserMeetupCard
                       key={meetup.id}
                       id={meetup.id}
-                      name={meetup.name}
+                      title={meetup.title}
                       description={meetup.description}
                       address={meetup.address}
                       image={meetup.image}

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import useGet from "../../Hooks/useGet";
 import SHOWMAP from "../../components/common/Functionality/Map";
@@ -23,7 +23,7 @@ const MeetupDetails = () => {
           <div className="px-5 w-full  bg-white py-2 lg:py-6">
             <div className="md:max-w-screen mx-auto py-10">
               <div className="flex flex-col border-b  gap-3 pb-5 ">
-                <h1 className="text-3xl font-medium w-[40%] border-b-2 border-slate-500 pb-2">
+                <h1 className=" text-2xl md:text-3xl font-medium xl:w-[40%] border-b-2 border-slate-500 pb-2">
                   {meetups.title}
                 </h1>
                 <div className="flex flex-col gap-1 mx-2">
@@ -49,12 +49,14 @@ const MeetupDetails = () => {
                       <div className="mb-5 flex items-center justify-between">
                         <h2 class="text-3xl pt-2 font-semibold">Details</h2>
                       </div>
-                      <h3 className="text-base">{meetups.description}</h3>
+                      <h3 className="text-base whitespace-break-spaces">
+                        {meetups.description}
+                      </h3>
                     </div>
                   </div>
-                  <div className="w-100 lg:mx-0 lg:ml-28 lg:mt-10 lg:w-90">
-                    <div className="top-24 sticky flex flex-col ">
-                      <div className=" bg-amber-100 px-5 pb-3 pt-6 sm:pb-4.5 lg:py-5 lg:rounded-b-2xl lg:rounded-t-2xl ">
+                  <div className="w-100 lg:mx-0 lg:ml-28 lg:mt-10 lg:w-90 ">
+                    <div className="top-24 md:max-lg:gap-10  sticky flex flex-col md:flex-row xl:flex-col  ">
+                      <div className=" bg-amber-100 rounded-lg px-5 pb-3 pt-6 sm:pb-4.5 lg:py-5 md:max-lg:my-10 lg:rounded-b-2xl lg:rounded-t-2xl ">
                         <div className="flex flex-col leading-normal gap-8 py-5">
                           <h2 className="text-lg">Date : {meetups.date}</h2>
                           <h2 className="text-lg">
@@ -63,7 +65,7 @@ const MeetupDetails = () => {
                         </div>
                       </div>
                       <div className="my-10 flex-1">
-                        <SHOWMAP address={meetups.address} />
+                        <SHOWMAP address={meetups.address} w={500} h={350} />
                       </div>
                     </div>
                   </div>

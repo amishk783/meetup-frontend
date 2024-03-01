@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import useInput from "../../Hooks/useInput";
 import { loginActions } from "../../Store/loginSlice";
 import { useState } from "react";
@@ -86,7 +86,7 @@ const Signup = () => {
       <section className="w-full flex xl:flex-row flex-col justify-center gap-10 max-container pt-16 pb-20 bg-white">
         <form
           onSubmit={formSubmitHandler}
-          className=" relative xl:3/5 flex flex-col justify-center items-center max-xl:padding-x max-container align-middle mt-12 pt-12 "
+          className=" relative xl:3/5 flex flex-col bg-amber-100 rounded-lg justify-center items-center max-xl:padding-x max-container align-middle mt-12 p-12 "
         >
           {userExistError && (
             <div className="border-2 px-3 mx-8 mb-4 py-2 flex justify-center ring ring-red-200 border-red-300 bg-red-100 rounded-md">
@@ -164,6 +164,8 @@ const Signup = () => {
           >
             Sign up
           </button>
+          <div className="flex pt-4 text-lg gap-2"><h1>Already have an account? </h1>
+          <Link to="/login" className="text-blue-600">Login</Link></div>
         </form>
       </section>
     </div>

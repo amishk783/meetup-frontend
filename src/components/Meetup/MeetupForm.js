@@ -71,9 +71,6 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     ) {
       setShouldUpload(true);
     }
-    resetAddress();
-    resetDescription();
-    resetTitle();
   };
 
   const formattedDate = moment(date).format("DD-MM-YYYY");
@@ -81,7 +78,7 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
   const formData = useMemo(() => {
     const data = new FormData();
     data.append("enteredAddress", enteredAddress);
-    data.append("enteredName", enteredTitle);
+    data.append("enteredTitle", enteredTitle);
     data.append("enteredDescription", enteredDescription);
     data.append("image", eventImage);
     data.append("date", formattedDate);
@@ -152,8 +149,6 @@ const MeetUpForm = ({ url, isEdit = false, meetup, handleLoadingChange }) => {
     isEdit,
     meetup,
     handleLoadingChange,
-    setIsLoading,
-    isLoading,
   ]);
 
   const displayImage = eventImage ? eventImage.name : "Choose a file";

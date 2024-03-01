@@ -1,8 +1,15 @@
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-
+import { useSelector, useDispatch } from "react-redux";
 const NavBar = () => {
   const isLogin = useSelector((state) => state.login.isAuthenthicated);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(loginActions.logout());
+    navigate("/home");
+  };
 
   return (
     <ul className="flex flex-1 justify-center items-center gap-5 lg:gap-16 max-lg:flex-col max-sm:gap-6 ">
@@ -33,6 +40,16 @@ const NavBar = () => {
         <Link to={`/${!isLogin ? "login" : "logout"}`}>
           {`${!isLogin ? "Log in" : "Log out"}`}
         </Link>
+        {isLogin ? (
+          <Link to={`/"login"}`}>Log in</Link>
+        ) : (
+          <button
+            onClick={handleLogout}
+            className="mr-4 text-blue-600 bg-white px-4 py-2 rounded-full max-sm:py-2"
+          >
+            Logout
+          </button>
+        )}
       </li>
     </ul>
   );

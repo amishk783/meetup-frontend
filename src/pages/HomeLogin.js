@@ -31,9 +31,6 @@ const HomeLogin = () => {
                 <h1 className="text-3xl font-bold leading-10 gl:text-heading">
                   Welcome, {username}
                 </h1>
-                <h2 className="mt-5  text-xl font-medium leading-9 ">
-                  Upcoming Events
-                </h2>
               </div>
             </div>
             <div className="flex flex-col lg:flex-row gl:flex-row gl:gap-10 pt-10 xl:space-x-10">
@@ -41,13 +38,13 @@ const HomeLogin = () => {
                 <div className="date">
                   <DatePicker />
                 </div>
-                <div className="mt-16 rounded-lg bg-gray1 px-4 py-6"></div>
               </div>
               <div className="flex-1">
+                <h2 className="text-xl pb-5 max-lg:pt-20 font-medium leading-9 whitespace-nowrap ">
+                  Upcoming Events
+                </h2>
+
                 <div className="mb-16">
-                  <h3 className="border-b-2 border-gray5 pb-3 text-xl font-medium capitalize md:text-xl">
-                    Today
-                  </h3>
                   <Filter handleFilter={handleFilter} />
                   <HomeMeetupList selectedFilter={filter} />
                 </div>

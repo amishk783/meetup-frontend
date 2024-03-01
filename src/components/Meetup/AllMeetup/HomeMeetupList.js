@@ -20,6 +20,7 @@ const HomeMeetupList = ({ selectedFilter }) => {
   } else if (selectedFilter === "Far") {
     sortedArray.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
+  console.log(sortedArray);
 
   return (
     <div className="grid grid-rows-4 pt-12 md:mx-5">
